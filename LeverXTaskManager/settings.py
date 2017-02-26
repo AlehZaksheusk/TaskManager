@@ -139,6 +139,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, 'assets'),
     os.path.join(BASE_DIR, 'application/react_app/dist'),
 )

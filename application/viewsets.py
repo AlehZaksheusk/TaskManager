@@ -50,15 +50,27 @@ class InitializeAppViewSet(APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request):
-        if request.user.is_manager:
-            responce_data = {'is_manager': True, 'user': UserSerializer(request.user).data}
-            projects = Project.objects.all()
-            users = User.objects.all()
-            tasks = Task.objects.all()
+        user = request.user;
+        projects = Project.objects.all()
+        users = User.objects.all()
+        tasks = Task.objects.all()
+        responce_data = {
+            'is_manager': request.user.is_manager,
+            'user': UserSerializer(request.user).data
+        }
+        if user.is_manager:
             if projects.exists():
                 responce_data['projects'] = ProjectSerializer(projects, many=True).data
             if tasks.exists():
                 responce_data['tasks'] = TaskSerializer(tasks, many=True).data
             if users.exists():
                 responce_data['users'] = UserSerializer(users, many=True).data
-            return Response(responce_data, status=status.HTTP_200_OK)
+        else:
+            if projects.exists():
+                projects = projects.filter(user=user)
+                responce_data['projects'] = ProjectSerializer(projects, many=True).data
+            if tasks.exists():
+                responce_data['tasks'] = TaskSerializer(tasks.filter(project__in=projects), many=True).data
+            if users.exists():
+                responce_data['users'] = UserSerializer(users, many=True).data
+        return Response(responce_data, status=status.HTTP_200_OK)
