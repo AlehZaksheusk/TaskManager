@@ -26,6 +26,7 @@ SECRET_KEY = 'exl*iplrg5&3p-ww@f=stc68d0o3tpl@53rk6e8c828^5kxhz2'
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    'localhost',
     'serene-chamber-26852.herokuapp.com'
 ]
 
@@ -74,7 +75,7 @@ ROOT_URLCONF = 'LeverXTaskManager.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
+        'DIRS': [os.path.join(BASE_DIR, 'application/templates')]
         ,
         'APP_DIRS': True,
         'OPTIONS': {
