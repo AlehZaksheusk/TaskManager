@@ -1,29 +1,39 @@
-import React, { Component, PropTypes } from 'react';
-import {
-  Modal,
-  Button,
-  FormControl,
-  TextInput,
-  ControlLabel,
-  FormGroup,
-  HelpBlock,
-} from 'react-bootstrap';
+import React from 'react';
+import { Modal, Button, FormControl, TextInput, FormGroup } from 'react-bootstrap';
 import FormTextInput from '../../containers/inputs/FormTextInput';
-import { USER_SETTINGS_INPUT_TYPES } from '../../constants/inputConstants';
+import FormSelectInput from '../../containers/inputs/FormSelectInput';
+import {
+  USER_SETTINGS_INPUT_TYPES,
+  USER_POSITION_CHOICES,
+} from '../../constants/inputConstants';
 
 const $ = require('jquery');
 
-export default class UserSettingsModal extends Component {
+export default class UserSettingsModal extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
       email: this.props.user.email,
       name: this.props.user.name,
+      is_manager: this.props.user.is_manager,
     };
   }
 
+  getTextInputs = () => {
+    return USER_SETTINGS_INPUT_TYPES.map((inputData, index) =>
+      (<FormTextInput
+        key={`upd-input-${index}`}
+        value={this.state[inputData.type]}
+        componentClass={inputData.componentClass}
+        {...inputData}
+        handleOnChange={this.handleOnChange}
+      />),
+    );
+  };
+
   updateUser = () => {
+    console.log(this.state);
     this.context.flux.actions.basic.updateItemSettings({
       type: 'users',
       data: this.state,
@@ -50,15 +60,14 @@ export default class UserSettingsModal extends Component {
               bsClass="update-user-form"
               controlId="update-user"
             >
-              {USER_SETTINGS_INPUT_TYPES.map((inputData, index) => {
-                return (<FormTextInput
-                  key={`reg-input-${index}`}
-                  value={this.state[inputData.type]}
-                  componentClass={inputData.componentClass}
-                  {...inputData}
-                  handleOnChange={this.handleOnChange}
-                />);
-              })}
+              {this.getTextInputs()}
+              <FormSelectInput
+                defaultValue={this.props.user.is_manager}
+                choices={USER_POSITION_CHOICES}
+                type={'is_manager'}
+                handleOnChange={this.handleOnChange}
+                isBool
+              />
             </FormGroup>
           </form>
         </Modal.Body>
@@ -78,5 +87,4 @@ export default class UserSettingsModal extends Component {
 
 UserSettingsModal.contextTypes = {
   flux: React.PropTypes.object,
-  getter: React.PropTypes.object,
 };

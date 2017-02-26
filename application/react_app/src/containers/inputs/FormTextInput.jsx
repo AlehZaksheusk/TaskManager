@@ -10,6 +10,7 @@ export default class FormInput extends Component {
   render() {
     return (
       <FormControl
+        type={this.props.extraType}
         value={this.props.value}
         componentClass={this.props.componentClass}
         ref={(input) => { this.input = input; }}

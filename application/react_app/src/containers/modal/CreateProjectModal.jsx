@@ -44,24 +44,24 @@ export default class CreateProjectModal extends Component {
         show={this.props.isShowCreateModal}
       >
         <Modal.Header>
-          Create new issue
+          Create new project
         </Modal.Header>
         <Modal.Body>
           <form>
             <FormGroup
-              bsClass="create-task-modal"
-              controlId="create-task"
+              bsClass="create-project-modal"
+              controlId="create-project"
             >
               {CREATE_PROJECT_INPUT_TYPES.map((inputData, index) => {
                 return (<FormTextInput
-                  key={`reg-input-${index}`}
+                  key={`prc-input-${index}`}
                   value={this.state[inputData.type]}
                   {...inputData}
                   handleOnChange={this.handleOnChange}
                 />);
               })}
               <FormSelectInput
-                defaultValue={this.props.user.id}
+                placeholder={'Select user'}
                 choices={choices}
                 type={'user'}
                 handleOnChange={this.handleOnChange}

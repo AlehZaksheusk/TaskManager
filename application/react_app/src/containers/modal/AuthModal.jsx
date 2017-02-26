@@ -19,8 +19,8 @@ export default class AuthModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: false,
-      password: false,
+      email: '',
+      password: '',
       error: false,
     };
   }

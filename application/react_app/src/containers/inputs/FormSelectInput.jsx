@@ -3,14 +3,22 @@ import {
   FormControl,
 } from 'react-bootstrap';
 
-export default class FormInput extends Component {
+export default class FormSelectInput extends Component {
+
+  handleOnChange = (e) => {
+    let value = e.target.value;
+    if (!this.props.isBool) {
+      value = parseInt(value, 10);
+    }
+    this.props.handleOnChange(this.props.type, value);
+  };
 
   render() {
     return (
       <FormControl
         componentClass="select"
         onChange={
-          (e) => { this.props.handleOnChange(this.props.type, parseInt(10, e.target.value)); }
+          (e) => { this.handleOnChange(e); }
         }
       >
         {this.props.choices.map((item, index) => {

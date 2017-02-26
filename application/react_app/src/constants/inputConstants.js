@@ -29,6 +29,7 @@ export const LOGIN_INPUT_TYPES = [
   },
   {
     type: 'password',
+    extraType: 'password',
     componentClass: 'input',
     placeholder: 'Enter password',
   },
@@ -70,3 +71,13 @@ export const CREATE_PROJECT_INPUT_TYPES = [
 
 
 export const REGISTRATION_KEYS = ['email', 'name', 'password1', 'password2', 'position'];
+export const USER_POSITION_CHOICES = [
+  {
+    label: 'Developer',
+    value: false,
+  },
+  {
+    label: 'Manager',
+    value: true,
+  },
+];

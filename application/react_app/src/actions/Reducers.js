@@ -38,7 +38,6 @@ export function deleteItem(payload) {
 export function updateItemSettings(payload) {
   const { type, data, id } = { ...payload };
   const callback = (responce) => {
-    console.log(responce);
     const index = _.indexOf(
       this.storeData[type],
       _.find(this.storeData[type], { id: responce.id }),
@@ -82,7 +81,6 @@ export function createNewItem(payload) {
 
 export function changeStoreFlag(payload) {
   const { flag, data } = { ...payload };
-  console.log(data);
   this.storeData[flag].push(data);
   this.emit('change');
 }
