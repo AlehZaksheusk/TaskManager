@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost',
-    'serene-chamber-26852.herokuapp.com'
+    'protected-ravine-72862.herokuapp.com'
 ]
 
 
