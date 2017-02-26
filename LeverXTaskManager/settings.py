@@ -26,10 +26,9 @@ SECRET_KEY = 'exl*iplrg5&3p-ww@f=stc68d0o3tpl@53rk6e8c828^5kxhz2'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'localhost',
     'protected-ravine-72862.herokuapp.com'
 ]
-
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 # Application definition
 
