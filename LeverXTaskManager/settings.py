@@ -25,7 +25,9 @@ SECRET_KEY = 'exl*iplrg5&3p-ww@f=stc68d0o3tpl@53rk6e8c828^5kxhz2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'serene-chamber-26852.herokuapp.com'
+]
 
 
 # Application definition
