@@ -36,7 +36,7 @@ class Project(Abstract):
 
 class Task(Abstract):
     description = models.TextField(default=False, verbose_name="Description")
-    due_date = models.DateField(verbose_name="Due date", default=datetime.today)
+    due_date = models.DateTimeField(verbose_name="Due date", default=datetime.today)
     user = models.ForeignKey(User)
     project = models.ForeignKey(Project)
 

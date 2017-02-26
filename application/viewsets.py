@@ -18,7 +18,7 @@ class TaskViewSet(viewsets.ModelViewSet):
 
 class ProjectViewSet(viewsets.ModelViewSet):
     queryset =  Project.objects.all()
-    serializer_class =  ProjectSerializer
+    serializer_class = ProjectSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -29,7 +29,7 @@ class UserViewSet(viewsets.ModelViewSet):
         serializer = CreateUserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.create_user(serializer.validated_data)
-        return Response({'user': self.serializer_class(user).data}, status=status.HTTP_201_CREATED)
+        return Response(self.serializer_class(user).data, status=status.HTTP_201_CREATED)
 
 
 class SignInViewSet(APIView):
@@ -51,11 +51,14 @@ class InitializeAppViewSet(APIView):
 
     def get(self, request):
         if request.user.is_manager:
-            responce_data = {}
+            responce_data = {'is_manager': True, 'user': UserSerializer(request.user).data}
             projects = Project.objects.all()
             users = User.objects.all()
+            tasks = Task.objects.all()
             if projects.exists():
                 responce_data['projects'] = ProjectSerializer(projects, many=True).data
+            if tasks.exists():
+                responce_data['tasks'] = TaskSerializer(tasks, many=True).data
             if users.exists():
                 responce_data['users'] = UserSerializer(users, many=True).data
             return Response(responce_data, status=status.HTTP_200_OK)

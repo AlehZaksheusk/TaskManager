@@ -6,7 +6,7 @@ from application.viewsets import TaskViewSet, \
 
 router = routers.DefaultRouter()
 router.register(r'signin', SignInViewSet)
-router.register(r'user', UserViewSet)
+router.register(r'users', UserViewSet)
 router.register(r'tasks', TaskViewSet)
 router.register(r'projects', ProjectViewSet)
 

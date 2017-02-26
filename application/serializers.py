@@ -1,12 +1,13 @@
 from rest_framework import serializers, exceptions
 from django.contrib.auth import authenticate
 from application.models import Task, Project, User
-from rest_framework.authtoken.models import Token
+from datetime import datetime
 
 class TaskSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Task
+        fields = '__all__'
 
 class ProjectSerializer(serializers.ModelSerializer):
 
