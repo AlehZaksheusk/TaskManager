@@ -32,6 +32,7 @@ export default class CreateProjectModal extends Component {
     this.context.flux.actions.basic.createNewItem({
       type: 'projects', data: this.state,
     });
+    this.props.toggleModal();
   };
 
   render() {

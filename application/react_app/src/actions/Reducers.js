@@ -49,7 +49,9 @@ export function updateItemSettings(payload) {
     url: `${process.env.NODE_ENV}/api/${type}/${payload.id}/`,
     type: 'PATCH',
     async: false,
-    data,
+    processData: true,
+    contentType: 'application/json;charset=utf-8',
+    data: JSON.stringify(data),
     headers: {
       Authorization: getAuthToken(),
     },

@@ -10,7 +10,7 @@ class TaskSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ProjectSerializer(serializers.ModelSerializer):
-
+    user = serializers.PrimaryKeyRelatedField(many=True, read_only=False, queryset=User.objects.all())
     class Meta:
         model = Project
         fields = '__all__'

@@ -69,7 +69,6 @@ export const CREATE_PROJECT_INPUT_TYPES = [
   },
 ];
 
-
 export const REGISTRATION_KEYS = ['email', 'name', 'password1', 'password2', 'position'];
 export const USER_POSITION_CHOICES = [
   {

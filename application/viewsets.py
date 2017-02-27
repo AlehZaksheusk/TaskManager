@@ -7,23 +7,26 @@ from rest_framework.authtoken.views import APIView
 from rest_framework.authentication import BasicAuthentication, TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from application.models import Task, Project, User
-from application.auth import CsrfExemptSessionAuthentication
+from rest_framework.parsers import MultiPartParser, JSONParser, FormParser
 from application.serializers import TaskSerializer, ProjectSerializer, AuthSerializer, CreateUserSerializer, UserSerializer
 
 
 class TaskViewSet(viewsets.ModelViewSet):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
+    parser_classes = (JSONParser, MultiPartParser, FormParser)
 
 
 class ProjectViewSet(viewsets.ModelViewSet):
     queryset =  Project.objects.all()
     serializer_class = ProjectSerializer
+    parser_classes = (JSONParser, MultiPartParser, FormParser)
 
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset =  User.objects.all()
     serializer_class = UserSerializer
+    parser_classes = (JSONParser, MultiPartParser, FormParser)
 
     def create(self, request, *args, **kwargs):
         serializer = CreateUserSerializer(data=request.data)
@@ -35,6 +38,7 @@ class UserViewSet(viewsets.ModelViewSet):
 class SignInViewSet(APIView):
     queryset = User.objects.all()
     permission_classes = (AllowAny,)
+    parser_classes = (JSONParser, MultiPartParser, FormParser)
 
     def post(self, request):
         serializer = AuthSerializer(data=request.data)
@@ -48,6 +52,7 @@ class InitializeAppViewSet(APIView):
     queryset = User.objects.all()
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
+    parser_classes = (JSONParser, MultiPartParser, FormParser)
 
     def get(self, request):
         user = request.user;

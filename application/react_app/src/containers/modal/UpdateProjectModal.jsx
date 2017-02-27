@@ -9,6 +9,7 @@ import {
   HelpBlock,
 } from 'react-bootstrap';
 import FormTextInput from '../../containers/inputs/FormTextInput';
+import FormSelectInput from '../../containers/inputs/FormSelectInput';
 import { CREATE_PROJECT_INPUT_TYPES } from '../../constants/inputConstants';
 
 const $ = require('jquery');
@@ -37,6 +38,10 @@ export default class UpdateProjectModal extends Component {
   };
 
   render() {
+    const users = this.context.getter.getUsers();
+    const choices = users.map((user) => {
+      return { value: user.id, label: user.name };
+    });
     return (
       <Modal
         show={this.props.isShow}
@@ -51,14 +56,22 @@ export default class UpdateProjectModal extends Component {
               controlId="update-user"
             >
               {CREATE_PROJECT_INPUT_TYPES.map((inputData, index) => {
-                return (<FormTextInput
-                  key={`reg-input-${index}`}
-                  value={this.state[inputData.type]}
-                  componentClass={inputData.componentClass}
-                  {...inputData}
-                  handleOnChange={this.handleOnChange}
-                />);
+                return (
+                  <FormTextInput
+                    key={`reg-input-${index}`}
+                    value={this.state[inputData.type]}
+                    componentClass={inputData.componentClass}
+                    {...inputData}
+                    handleOnChange={this.handleOnChange}
+                  />);
               })}
+              <FormSelectInput
+                placeholder={'Select user'}
+                choices={choices}
+                type={'user'}
+                handleOnChange={this.handleOnChange}
+                multiple
+              />
             </FormGroup>
           </form>
         </Modal.Body>
