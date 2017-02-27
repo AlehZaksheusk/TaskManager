@@ -24,8 +24,19 @@ export default class CreateTasksModal extends Component {
       name: '',
       due_date: '',
       user: this.props.user.id,
+      project: '',
     };
   }
+
+  componentWillMount() {
+    const project = this.getDefaultProject();
+    this.setState({ project });
+  }
+
+  getDefaultProject = () => {
+    const projects = this.context.getter.getProjects();
+    return projects[0] ? projects[0].id : false;
+  };
 
   handleOnChange = (type, value) => {
     let localValue = value;
@@ -35,6 +46,7 @@ export default class CreateTasksModal extends Component {
     }
     this.setState({ [type]: localValue });
   };
+
 
   handleClickSubmit = () => {
     this.context.flux.actions.basic.createNewItem({

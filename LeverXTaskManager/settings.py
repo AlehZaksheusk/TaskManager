@@ -25,13 +25,12 @@ SECRET_KEY = 'exl*iplrg5&3p-ww@f=stc68d0o3tpl@53rk6e8c828^5kxhz2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    'protected-ravine-72862.herokuapp.com'
-]
+# ALLOWED_HOSTS = [
+#     'protected-ravine-72862.herokuapp.com'
+# ]
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -50,6 +49,9 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ),
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+    )
 }
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -139,7 +141,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, 'application/react_app/dist'),
+    os.path.join(BASE_DIR, 'application/react_app/dist'),
 )

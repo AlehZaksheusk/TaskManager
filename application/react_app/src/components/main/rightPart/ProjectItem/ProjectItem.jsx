@@ -16,7 +16,7 @@ export default class ProjectItem extends React.Component {
           Assigned to: {users.map((user) => {
             let retValue;
             if (this.props.project.user.indexOf(user.id) !== -1) {
-              retValue = user.name;
+              retValue = `${user.name}; `;
             }
             return retValue;
           })}
